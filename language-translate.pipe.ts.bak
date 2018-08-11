@@ -1,0 +1,14 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { LanguageTranslate } from './language-translate';
+
+@Pipe({
+    name: 't',
+    pure: true
+})
+export class LanguageTranslatePipe implements PipeTransform {
+    constructor( public lang: LanguageTranslate ) {}
+    transform(value, args) {
+        return this.lang.t(value, args);
+    }
+}
+

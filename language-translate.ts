@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 
+interface LanguageText {
+    ko?: string;
+    en?: string;
+    ch?: string;
+    jp?: string;
+}
+type LanguageCode = 'ko' | 'en' | 'jp' | 'ch';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class LanguageTranslate {
 
-    languageCode: 'ko' | 'en' | 'jp' | 'ch' = 'en';
+    languageCode: LanguageCode = 'en';
     constructor(
 
     ) {
-        let lc = this.getBrowserLanguage();
-        if (lc === 'ko' || lc === 'en' || lc === 'jp' || lc === 'ch') {
 
-        } else {
-            lc = 'en';
-        }
-        this.languageCode = <any>lc;
+        this.languageCode = this.correctLanguageCode(<any>this.getBrowserLanguage());
     }
 
 
@@ -70,6 +73,14 @@ export class LanguageTranslate {
     //     }
     // }
 
+    correctLanguageCode(lc: LanguageCode): LanguageCode {
+        if (lc === 'ko' || lc === 'en' || lc === 'jp' || lc === 'ch') {
+
+        } else {
+            lc = 'en';
+        }
+        return lc;
+    }
     /**
      * Returns translated text string.
      * @param code code to translate
@@ -80,8 +91,9 @@ export class LanguageTranslate {
      *          {{ fire.t('HOME') }}
      *          {{ fire.ln.HOME }}
      */
-    translate(code: any, info?): string {
-        const str = code[this.languageCode];
+    translate(code: LanguageText, info?): string {
+        const ln = this.correctLanguageCode(this.languageCode);
+        const str = code[ln];
         return this.patchMarker(str, info);
     }
 
@@ -90,7 +102,7 @@ export class LanguageTranslate {
      * @param code same as translate()
      * @param info same as transate()
      */
-    t(code: any, info?: any): string {
+    t(code: LanguageText, info?: any): string {
         // console.log('code', code);
         return this.translate(code, info);
     }

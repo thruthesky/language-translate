@@ -1,3 +1,7 @@
+/**
+ * @file language-translate
+ *
+ */
 import { Injectable } from '@angular/core';
 
 interface LanguageText {

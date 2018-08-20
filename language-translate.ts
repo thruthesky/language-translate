@@ -1,6 +1,6 @@
 /**
  * @file language-translate
- *
+ * @desc translate
  */
 import { Injectable } from '@angular/core';
 

@@ -10,7 +10,7 @@ interface LanguageText {
     ch?: string;
     jp?: string;
 }
-type LanguageCode = 'ko' | 'en' | 'jp' | 'ch';
+type LanguageCode = string;
 
 
 @Injectable({
@@ -22,7 +22,6 @@ export class LanguageTranslate {
     constructor(
 
     ) {
-
         this.languageCode = this.correctLanguageCode(<any>this.getBrowserLanguage());
     }
 
@@ -96,6 +95,7 @@ export class LanguageTranslate {
      *          {{ fire.ln.HOME }}
      */
     translate(code: LanguageText, info?): string {
+        // console.log('lang: ', this.languageCode);
         const ln = this.correctLanguageCode(this.languageCode);
         const str = code[ln];
         return this.patchMarker(str, info);

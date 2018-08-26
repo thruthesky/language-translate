@@ -89,15 +89,14 @@ export class LanguageTranslate {
      * @param code code to translate
      * @param info information to add on the translated text
      *
-     * @example
-     *          {{ fire.translate('HOME') }}
-     *          {{ fire.t('HOME') }}
-     *          {{ fire.ln.HOME }}
      */
     translate(code: LanguageText, info?): string {
         // console.log('lang: ', this.languageCode);
         const ln = this.correctLanguageCode(this.languageCode);
-        const str = code[ln];
+        let str = code[ln];
+        if ( ! str ) {
+            str = code['en'];
+        }
         return this.patchMarker(str, info);
     }
 

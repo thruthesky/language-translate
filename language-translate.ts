@@ -18,6 +18,9 @@ type LanguageCode = string;
 })
 export class LanguageTranslate {
 
+    /**
+     * This can be changed lively.
+     */
     languageCode: LanguageCode = 'en';
     constructor(
 

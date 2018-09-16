@@ -5,10 +5,7 @@
 import { Injectable } from '@angular/core';
 
 export interface LanguageText {
-    ko?: string;
-    en?: string;
-    ch?: string;
-    jp?: string;
+    [code: string]: string;
 }
 type LanguageCode = string;
 
@@ -19,7 +16,8 @@ type LanguageCode = string;
 export class LanguageTranslate {
 
     /**
-     * This can be changed lively.
+     * This sets the languages of app.
+     * It can be changed lively.
      */
     languageCode: LanguageCode = 'en';
     constructor(
